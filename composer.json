@@ -1,0 +1,61 @@
+{
+    "name": "jaesung2061/anvel",
+    "description": "Laravel. Angular. Integrated",
+    "keywords": ["framework", "laravel", "angular"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "astatroth/laravel-timer": "dev-master",
+        "ixudra/curl": "^6.16",
+        "kirill-dan/uploadimage": "2.*",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "pusher/pusher-http-laravel": "^4.1",
+        "pusher/pusher-php-server": "^3.0",
+        "spatie/laravel-permission": "^2.9",
+        "sudiptpa/guid": "^1.0",
+        "symfony/dom-crawler": "^4.0",
+        "tonyhhyip/laravel-sse": "~1.0",
+        "tymon/jwt-auth": "dev-develop"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}

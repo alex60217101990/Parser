@@ -1,0 +1,21 @@
+.demo-tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.demo-tab-content {
+  padding: 16px;
+  overflow: hidden;
+}
+
+.my-main-card{
+  width: auto;
+  margin-right: 15px;
+}
+.wind1{
+  margin: auto;
+}
+@media screen and (max-width: 805px) {
+  .my-main-card{
+   margin-right: 25px;
+  }
+}

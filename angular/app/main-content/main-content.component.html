@@ -1,0 +1,295 @@
+<div class="example-container mat-elevation-z6">
+    <div class="example-header">
+        <form class="example-form" [formGroup]="options" [style.fontSize.px]="getFontSize()">
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td>
+        <mat-form-field class="example-full-width">
+            <input formControlName="filterText" matInput (keyup)="applyFilter($event.target.value)"
+                   (focus)="searchStyle()" (blur)="searchStyle1()">
+            <mat-icon matSuffix color="{{IndColor}}">search</mat-icon>
+            <mat-placeholder><mat-icon>filter_list</mat-icon> <b> Filter</b> <i> contents...</i></mat-placeholder>
+            <mat-hint align="end">You entered {{options.value.filterText}}</mat-hint>
+        </mat-form-field></td>
+                <td>
+        <mat-form-field class="example-full-width">
+            <mat-select formControlName="selectElement">
+                <mat-option value="id">filter by id </mat-option>
+                <mat-option value="link">filter by link </mat-option>
+                <mat-option value="updated at">filter by updated at </mat-option>
+                <mat-option value="ad from">filter by ad from </mat-option>
+                <mat-option value="type of structure">filter by type of structure </mat-option>
+                <mat-option value="type of apartment">filter by type of apartment </mat-option>
+                <mat-option value="number of rooms">filter by number of rooms </mat-option>
+                <mat-option value="floor">filter by floor </mat-option>
+                <mat-option value="storey house">filter by storey house </mat-option>
+                <mat-option value="total area">filter by total area </mat-option>
+                <mat-option value="living space">filter by ad living space </mat-option>
+                <mat-option value="kitchen area">filter by kitchen area </mat-option>
+                <mat-option value="price">filter by price </mat-option>
+                <mat-option value="telephones">filter by telephones </mat-option>
+                <mat-option value="number of photos">filter by number of photos </mat-option>
+                <mat-option value="status">filter by status </mat-option>
+                <mat-option value="number of similar">filter by number of similar </mat-option>
+
+                <mat-option value="address">filter by address </mat-option>
+                <mat-option value="cause of change">filter by cause of change </mat-option>
+                <mat-option value="exchange">filter by exchange </mat-option>
+                <mat-option value="formula of exchange">filter by formula of exchange </mat-option>
+                <mat-option value="state">filter by state </mat-option>
+                <mat-option value="source of information">filter by source of information </mat-option>
+                <mat-option value="bathroom type">filter by bathroom type </mat-option>
+                <mat-option value="wall material">filter by wall material </mat-option>
+                <mat-option value="phone line">filter by phone line </mat-option>
+                <mat-option value="having a bath">filter by having a bath </mat-option>
+                <mat-option value="number of balconies">filter by number of balconies </mat-option>
+                <mat-option value="notes">filter by notes </mat-option>
+                <mat-option value="display info">filter by display info </mat-option>
+            </mat-select>
+            <mat-placeholder><mat-icon>touch_app</mat-icon> <b> Select</b> <i> filter criterion.</i></mat-placeholder>
+            <mat-hint align="end">The table will filter by {{options.value.selectElement}}</mat-hint>
+        </mat-form-field>
+                </td>
+            </tr></table>
+        </form>
+    </div>
+      <div style="overflow-x: hidden; padding-bottom: 20px">
+           <div id="tableScroll" style="overflow: scroll; padding-bottom: 30px">
+    <mat-table class="table-hover" #table [dataSource]="dataSource" matSort>
+
+      <!---->
+        <ng-container matColumnDef="id">
+            <mat-header-cell class="thead-dark" *matHeaderCellDef mat-sort-header> No.ID объявления </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="link">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Сылка </mat-header-cell>
+            <mat-cell class="font fontBody1" *matCellDef="let element"> {{element.link}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="updated_at">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.updated_at | date:"yyyy-MM-dd h:m:s"}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ad_from">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Объявление от </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.ad_from}} </mat-cell>
+        </ng-container>
+
+               <ng-container matColumnDef="type_of_structure">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Тип </mat-header-cell>
+                   <mat-cell class="font" *matCellDef="let element"> {{element.type_of_structure}} </mat-cell>
+               </ng-container>
+
+               <ng-container matColumnDef="type_of_apartment">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Тип квартиры </mat-header-cell>
+                   <mat-cell class="font" *matCellDef="let element"> {{element.type_of_apartment}} </mat-cell>
+               </ng-container>
+
+
+        <ng-container matColumnDef="number_of_rooms">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Количество комнат </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.number_of_rooms}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="floor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Этаж </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.floor}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="storey_house">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Этажность дома </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.storey_house}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="total_area">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Общая площадь </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.total_area}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="living_space">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Жилая площадь </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.living_space}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="kitchen_area">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Площадь кухни </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.kitchen_area}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Стоимость </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.price}} $</mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="telephones">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.telephones}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="number_of_photos">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Количество фотографий </mat-header-cell>
+            <mat-cell class="font" *matCellDef="let element"> {{element.number_of_photos}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Статус </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="number_of_similar">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> number_of_similar </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.number_of_similar}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Адрес объкта </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.address}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="cause_of_change">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Адрес объкта </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.cause_of_change}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="exchange">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Опция обмена </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{!!element.exchange?'present':'absent'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="formula_of_exchange">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Формула обмена </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.formula_of_exchange}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Состояние </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.state}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="source_of_information">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Источник данных </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.source_of_information}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bathroom_type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Тип ванной </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.bathroom_type}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="wall_material">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Материал стен </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.wall_material}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="phone_line">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Наличие телефонной линии </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{(!!element.phone_line)?'present':'absent'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="having_a_bath">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Наличие ванной </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{(!!element.having_a_bath)?'present':'absent'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="number_of_balconies">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Количество балконов </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.number_of_balconies}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="notes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Дополнительная информация </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.notes}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="display_info">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Информация на странице </mat-header-cell>
+            <mat-cell class="font fontBody" *matCellDef="let element"> {{element.display_info}} </mat-cell>
+        </ng-container>
+
+
+               <mat-header-row *matHeaderRowDef="displayedColumns" style="background: #B388FF"></mat-header-row>
+               <mat-row class="hovered" *matRowDef="let row; columns: displayedColumns;"
+                        (click)="highlight(row)"></mat-row>
+               <!--       [routerLink]="['ad', row.id]"/////////// [ngClass]="{'highlight': selectedRowIndex == row.id}" -->
+    </mat-table>
+    </div>
+</div>
+    <mat-paginator #paginator
+                   [length]="Ads.length"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[10, 15, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>
+
+
+<!--      <ng-container matColumnDef="exchange">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Опция обмена </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.exchange}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="formula_of_exchange">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Формула обмена </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.formula_of_exchange}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Состояние </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.state}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="source_of_information">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Источник данных </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.source_of_information}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bathroom_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Тип ванной </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.bathroom_type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="wall_material">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Материал стен </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.wall_material}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone_line">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Наличие телефонной линии </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.phone_line}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="having_a_bath">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Наличие ванной </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.having_a_bath}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="number_of_balconies">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Количество балконов </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.number_of_balconies}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="notes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Дополнительная информация </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.notes}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="display_info">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Информация на странице </mat-header-cell>
+        <mat-cell class="font" *matCellDef="let element"> {{element.display_info}} </mat-cell>
+    </ng-container>-->

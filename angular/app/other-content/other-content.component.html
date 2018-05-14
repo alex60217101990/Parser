@@ -1,0 +1,97 @@
+<mat-card>
+  <mat-card-content>
+    <h2 class="example-h2" color="primary">Progress Test:</h2>
+    <section class="example-section">
+   <!--   <div *ngIf="longOperation$ | async as parsEnd; then OOO else LookProgress;">
+        <ng-template #OOO *ngIf="longOperation$==true; then notEmpty else empty;">
+        <ng-template #notEmpty>kjbgklbgbgkbgfbbkgjfdxfjbvfjkbvfjbvfjbjfkcbnfckjnblgnb</ng-template>
+        <ng-template #empty>empty animation...</ng-template>
+        </ng-template>
+      </div>
+      <ng-template #LookProgress>
+        <mat-progress-bar mode="query" color="warn" style="width: 30%; margin: auto;"></mat-progress-bar>
+      </ng-template>-->
+
+
+      <div class="button-row">
+        <button mat-raised-button color="primary"
+                (click)="$StartStop.getSignal({$event: true, region: select_region, number_of_pages: select_count})">Start</button>
+        <button mat-raised-button color="warn"
+                (click)="$StartStop.getSignal({$event: false, region: select_region, number_of_pages: select_count})">Stop</button>
+
+        <button mat-raised-button (click)="proxy_list.length=0;">Clear</button>
+
+        <button mat-raised-button (click)="startProxyParse()">Start proxy parse</button>
+
+          <button mat-button style="color: #FF9800;" [matMenuTriggerFor]="settings">Parser settings</button>
+          <mat-menu #settings="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="region">область</button>
+              <button mat-menu-item [matMenuTriggerFor]="pages">pages</button>
+          </mat-menu>
+          <mat-menu #region="matMenu">
+              <div *ngFor="let region of RegionsList; let i=index;">
+                  <button mat-menu-item [value]="region" (click)="ChangeRegion(region,i)"
+                          [style.color]="(i===index_of)?'#FF80AB':'#AA00FF'" style="min-width: 200px!important;"
+                          [style.background]="(i===index_of)?'#FFEBEE':'#F3E5F5'">
+                      <span [hidden]="true">{{i+1}}</span>{{region}}</button>
+              </div>
+          </mat-menu>
+          <mat-menu #pages="matMenu">
+              <button mat-menu-item (click)="ChangeCountPage(10)" class="hover-menu"
+                      [style.color]="(select_count===10)?'#FF80AB':'#AA00FF'"
+                      [style.background]="(select_count===10)?'#FFEBEE':'#F3E5F5'">10</button>
+              <button mat-menu-item (click)="ChangeCountPage(20)" class="hover-menu"
+                      [style.color]="(select_count===20)?'#FF80AB':'#AA00FF'"
+                      [style.background]="(select_count===20)?'#FFEBEE':'#F3E5F5'">20</button>
+              <button mat-menu-item (click)="ChangeCountPage(30)" class="hover-menu"
+                      [style.color]="(select_count===30)?'#FF80AB':'#AA00FF'"
+                      [style.background]="(select_count===30)?'#FFEBEE':'#F3E5F5'">30</button>
+          </mat-menu>
+
+          <h3 class="example-h3" style="color: #DC143C;">Количество распаршеных объявлений: {{count_of_ad}}</h3>
+
+          <div [hidden]="indicate" style="/*position: relative*/">
+              <!-- You can now use it in app.component.html -->
+              <circle-progress style="position: absolute; right: 35px; top: 10px;"
+                      [percent]="value"
+                      [radius]="48"
+                      [showTitle] = "true"
+                      [outerStrokeWidth]="7"
+                      [showUnits] = "true"
+                      [showSubtitle] = "true"
+                      [showInnerStroke] = "true"
+                      [clockwise] = "true"
+                      [innerStrokeWidth]="8"
+                      [backgroundPadding] = "5"
+                      [backgroundOpacity] = "1"
+                      backgroundColor = "transparent"
+                      backgroundStroke = transparent
+                      outerStrokeColor = "#78C000"
+                      innerStrokeColor = "#C7E596"
+                      titleColor = "#444444"
+                      unitsColor = "#444444"
+                      subtitleColor = "#A9A9A9"
+                      space = "5"
+                      innerStrokeWidth = "4"
+                      [backgroundStrokeWidth] = "0"
+                      outerStrokeLinecap = "round"
+                      titleFontSize = "20"
+                      unitsFontSize = "18"
+                      subtitleFontSize = "12"
+                      [animation]="false"
+              ></circle-progress>
+
+              <!-- <h3 class="example-h3" style="color: #DC143C;">{{value}} %</h3>  -->
+          </div>
+
+      </div>
+
+    </section>
+  </mat-card-content>
+    <div *ngFor="let proxy of proxy_list">
+        <p>
+            <span [style.color]="proxy.color?'#1DE9B6':'#FF1744'" style="font-size: 1.1vm">&#10004;</span>
+            <span style="color: #00B8D4; font-size: 1.1vm">IP адрес &#10155; {{ proxy.ip }} Тип IPV4 дреса &#10155; {{ proxy.proxy_type }} Возможность HTTPS &#10155; {{ proxy.bool_https }} Номер порта &#10155; {{ proxy.port }}</span>
+        </p>
+    </div>
+</mat-card>

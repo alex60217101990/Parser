@@ -1,0 +1,13 @@
+.example-margin {
+  margin: 0 10px;
+}
+.example-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+::ng-deep {
+  .hover-menu:hover {
+    background: #F3E5F5;
+  }
+}

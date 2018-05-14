@@ -1,0 +1,138 @@
+<div *ngIf="Small; then small_menu else big_menu"></div>
+
+<div [hidden]="visibleLoader" style="position: absolute; width: 90%; left: 5%; top: 51px; z-index: 10000000000000000000">
+    <mat-progress-bar mode="query" color="warn" style="width: 100%; margin: auto;"></mat-progress-bar>
+</div>
+
+<ng-template #big_menu>
+<mat-toolbar color="primary" class="mat-elevation-z7">
+    <mat-toolbar-row>
+
+        <!-- <div *ngIf=""></div>
+        <span><h2 class="example-h2">{{title}}</h2></span>
+        <span><div mat-card-avatar class="example-header-image"></div> {{title}}</span>-->
+        <div *ngIf="(!!avatar); then photo1 else photo2"></div>
+
+        <ng-template #photo1>
+                 <span>
+                <mat-card-header>
+                  <!--  <div mat-card-avatar [style.backgroundImage]="'url('+ avatar +')'"
+                         class="example-header-image"></div>-->
+                    <img [src]="avatar" class="rounded-circle" style="width: 50px; height: 50px;">
+                    <mat-card-title>{{title}}</mat-card-title>
+                </mat-card-header>
+                 </span>
+        </ng-template>
+        <ng-template #photo2>
+             <span>
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image1"></div>
+                    <mat-card-title>{{title}}</mat-card-title>
+                </mat-card-header>
+                 </span>
+        </ng-template>
+
+
+        <span class="example-spacer"></span>
+
+
+        <span class="nav-bottom"><button mat-button (click)="MainPageLink()" [ngClass]="{activeLink:toogleClass[0].indicate}">
+            <span>Home </span>
+            <mat-icon svgIcon="home-passive" *ngIf="end_navigation!=='/'; else main"></mat-icon>
+             <ng-template #main>
+                <mat-icon svgIcon="home-active"></mat-icon>
+            </ng-template>
+        </button>
+        </span>
+
+        <span class="nav-bottom"><button mat-button (click)="OtherRouterLink()" [ngClass]="{activeLink:toogleClass[1].indicate}">
+            <span>Other </span>
+            <i class="material-icons md-36 example-icon">bubble_chart</i>
+        </button>
+        </span>
+
+        <span class="nav-bottom last"><button mat-button (click)="UsersListRouterLink()" [ngClass]="{activeLink:toogleClass[2].indicate}">
+            <span>Admin </span>
+             <i class="material-icons md-36 example-icon" *ngIf="end_navigation!=='/users-list'; else admin">people_outline</i>
+            <ng-template #admin>
+                <i class="material-icons md-36 example-icon">people</i>
+            </ng-template>
+        </button>
+        </span>
+
+
+        <span><span id="logout-text" [ngClass]="{active: activation}">Logout: </span>
+            <i class="material-icons md-36 example-icon" id="logout"
+               (click)="onLogout()" [ngClass]="{active: activation}">exit_to_app</i></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+    <ng-progress #progressBar [meteor]="options.meteor" [color]="options.color" [min]="options.min" [speed]="options.speed"
+                 [max]="options.max" [direction]="options.direction" [thick]="options.thick" [spinner]="options.spinner"
+                 [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" >
+    </ng-progress>
+</ng-template>
+
+
+
+
+<ng-template #small_menu>
+    <mat-toolbar color="primary" class="mat-elevation-z7">
+        <mat-toolbar-row>
+            <span [style.top]="topp1==true?'-10px':'0px'"
+                  style="margin-right: 0px; position: relative; top: -10px">
+                <h2 class="example-h2">{{title}}</h2></span>
+            <span class="example-spacer"></span>
+            <span [style.top]="topp1==true?'-10px':'0px'"
+                  style="margin-right: 0px; position: relative; font-size: small; top: -10px">Navigate Menu</span>
+            <button mat-button [matMenuTriggerFor]="pages" [style.top]="topp==true?'-10px':'0px'"
+                    style="margin-right: 0px; position: relative; top: -10px">
+                <div class="cssload-loader">
+                    <div class="cssload-inner cssload-one"></div>
+                    <div class="cssload-inner cssload-two"></div>
+                    <div class="cssload-inner cssload-three"></div>
+                </div>
+            </button>
+
+    <mat-menu #pages="matMenu" color="primary" class="activeLink mainLink" [overlapTrigger]="false">
+        <button mat-menu-item class="activeLink2" (click)="MainPageLink()">
+            <mat-icon color="primary" style=" position: relative; top: -10px;" svgIcon="home-passive" *ngIf="end_navigation!=='/'; else main"></mat-icon>
+             <ng-template #main>
+                <mat-icon color="primary" style=" position: relative; top: -10px;" svgIcon="home-active"></mat-icon>
+            </ng-template>
+                 <span> Home </span>
+        </button>
+
+        <button mat-menu-item class="activeLink2" (click)="OtherRouterLink()">
+            <mat-icon color="primary">bubble_chart</mat-icon>
+            <span> Other </span>
+        </button>
+
+
+        <button mat-menu-item class="activeLink2" (click)="UsersListRouterLink()">
+            <mat-icon color="primary" *ngIf="end_navigation!=='/users-list'; else admin">people_outline</mat-icon>
+            <ng-template #admin>
+                <mat-icon color="primary">people</mat-icon>
+            </ng-template>
+            <span> Admin </span>
+        </button>
+
+        <button mat-menu-item class="activeLink2">
+            <mat-icon color="primary" (click)="onLogout()">exit_to_app</mat-icon>
+            <span>Logout: </span>
+        </button>
+
+    </mat-menu>
+            <ng-progress #progressBar [meteor]="options.meteor" [color]="options.color" [min]="options.min" [speed]="options.speed"
+                         [max]="options.max" [direction]="options.direction" [thick]="options.thick"
+                         [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" [spinner]="options.spinner" >
+            </ng-progress>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+</ng-template>
+<mat-card class="content" id="content">
+    <mat-card-content>
+        <router-outlet></router-outlet>
+        <!--  <re-captcha (resolved)="resolved($event)"></re-captcha> -->
+    </mat-card-content>
+</mat-card>

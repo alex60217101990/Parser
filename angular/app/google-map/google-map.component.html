@@ -1,0 +1,57 @@
+<mat-card style="width: 100%; margin: 0px; background: #FFFF8D">
+  <mat-card-content>
+    <h3 style="text-align: center; color: #F57F17; margin-top: 20px;" class="example-h3">Location page:</h3>
+    <div class="form-group">
+      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+    </div>
+    <agm-map [scrollwheel]="true" style="
+    /*[disableDefaultUI]='true' overflow: visible!important; visibility: visible!important;*/
+    width: 100%!important; height: 400px!important;"
+             [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+             [zoomControl]="zoomControl"
+             (mapClick)="mapClicked($event)"
+             [mapTypeId]="typeMap"
+             [mapTypeControl] = "false"
+             [scaleControl] = "true"
+             [streetViewControl] = "streetViewControl"
+             [rotateControl] = "true"
+             [fullscreenControl] = "fullscreenControl"
+             (mapReady)="resizeMap()"
+             #map>
+      <!--<agm-marker #marker [latitude]="lat"
+                  [longitude]="lng"
+                  [draggable]="true">
+      </agm-marker> [mapTypeId]="typeMap"-->
+      <agm-marker #marker *ngFor="let m of markers; let i = index"
+                  [latitude]="m.lat"
+                  [longitude]="m.lng"
+                  [label]="m.label"
+                  [markerDraggable]="m.draggable"
+                  iconUrl="storage/icons/custom-marker.png"
+                  (dragEnd)="markerDragEnd(m, $event)">
+      </agm-marker>
+      <agm-circle [latitude]="lat"
+                  [longitude]="lng"
+                  [draggable]="true">
+      </agm-circle>
+    </agm-map>
+
+    <div class="button-row" style="width: 100%">
+      <mat-radio-group [(ngModel)]="typeMap">
+        <mat-radio-button color="warn"  value="roadmap" style="color: #F9A825">Type "roadmap"</mat-radio-button>
+        <mat-radio-button color="warn"  value="satellite" style="color: #F9A825">Type "satellite"</mat-radio-button>
+        <mat-radio-button color="warn"  value="hybrid" style="color: #F9A825">Type "hybrid"</mat-radio-button>
+        <mat-radio-button color="warn"  value="terrain" style="color: #F9A825">Type "terrain"</mat-radio-button>
+        <mat-checkbox class="example-margin" color="warn" style="color: #F9A825"
+                      [(ngModel)]="fullscreenControl">Full screen option</mat-checkbox>
+        <mat-checkbox style="color: #F9A825" class="example-margin" color="warn"
+                      [(ngModel)]="zoomControl">Zoom option</mat-checkbox>
+        <mat-checkbox style="color: #F9A825" class="example-margin" color="warn"
+                      [(ngModel)]="streetViewControl">Street view option</mat-checkbox>
+      </mat-radio-group>
+    </div>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Адрес:" disabled [value]="address">
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>

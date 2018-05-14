@@ -1,0 +1,44 @@
+.example-full-width {
+  width: 100%;
+}
+.button-row{
+  display: flex;
+  align-items: center;
+  width: 55%;
+  padding: 8px 0px 5px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0!important;
+  color: #F57F17!important;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between!important;
+  align-items: center!important;
+  color: #F57F17!important;
+}
+agm-map {
+  height: 300px;
+}
+agm-map * {
+  overflow:visible;
+}
+
+
+.mat-radio-button ~ .mat-radio-button {
+  padding-right: 16px;
+}
+
+
+:host ::ng-deep .mat-input-placeholder{
+  color: #F57F17!important;
+  font-size: 14px!important;
+}
+:host ::ng-deep .mat-input{
+  color: #F57F17!important;
+}

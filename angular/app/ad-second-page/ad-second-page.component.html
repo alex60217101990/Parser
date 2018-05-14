@@ -1,0 +1,212 @@
+<mat-card style="width: 100%; margin: 0px; background: #64FFDA">
+  <mat-card-content>
+    <h3 style="text-align: center; color: #00BFA5; margin-top: 20px;" class="example-h3">Second page:</h3>
+  <div *ngIf="(!!ad); then Present else Absent"></div>
+    <ng-template #Present>
+
+
+
+
+
+
+
+
+      <div class="button-row" style="width: 100%">
+        <form [formGroup]="Page2" style="width: 100%;">
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="ID объвления." disabled value="{{ad.id}}">
+                  <mat-hint style="color:#009688!important;" align="end">index of ad: {{ad.id}}.</mat-hint>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="Ссылка объявления."
+                         type="text" value="{{ad.link}}" formControlName="link">
+                  <mat-hint style="color:#009688!important;" align="end">{{(!!link.value)?link.value.toString():'not specified.'}}</mat-hint>
+                  <mat-error *ngIf="link.hasError('required')">
+                    Field is empty.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="link.hasError('pattern') && !link.hasError('required')">
+                    Please, enter valid value.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="link.hasError('maxLength')&& !link.hasError('required')">
+                    Too long string.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="link.hasError('minLength')&&!link.hasError('required')">
+                    Too small string.
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="Обьявление от..."
+                         type="text" value="{{ad.ad_from}}" formControlName="ad_from">
+                  <mat-hint style="color:#009688!important;" align="end">{{(!!Adfrom.value)?Adfrom.value.toString():'not specified.'}}</mat-hint>
+                  <mat-error *ngIf="Adfrom.hasError('required')">
+                    Field is empty.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="Adfrom.hasError('pattern') && !Adfrom.hasError('required')">
+                    Please, enter valid value.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="Adfrom.hasError('maxLength')&& !Adfrom.hasError('required')">
+                    Too long string.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="Adfrom.hasError('minLength')&&!Adfrom.hasError('required')">
+                    Too small string.
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="Тип объвления." formControlName="type_of_structure"
+                         value="{{type_of_structure.type_of_structure}}">
+                  <mat-hint style="color:#009688!important;" align="end">type:{{(!!type_of_structure.type_of_apartment)?
+                    type_of_structure.value.toString():'not specified.'}}.</mat-hint>
+                  <mat-error *ngIf="type_of_structure.hasError('required')">
+                    Field is empty.
+                  </mat-error>
+                  <mat-error *ngIf="type_of_structure.hasError('min')">
+                    Field is small.
+                  </mat-error>
+                  <mat-error *ngIf="type_of_structure.hasError('max')">
+                    Field is big.
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="Тип квартиры объявления."
+                         type="text" value="{{type_of_apartment.type_of_apartment}}" formControlName="type_of_apartment">
+                  <mat-hint style="color:#009688!important;" align="end">{{(!!type_of_apartment.type_of_apartment)?
+                    type_of_apartment.value.toString():'not specified.'}}</mat-hint>
+                  <mat-error *ngIf="type_of_apartment.hasError('required')">
+                    Field is empty.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="type_of_apartment.hasError('pattern') && !type_of_apartment.hasError('required')">
+                    Please, enter valid value.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="type_of_apartment.hasError('max') && !type_of_apartment.hasError('required')">
+                    Too long string.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="type_of_apartment.hasError('min') && !type_of_apartment.hasError('required')">
+                    Too small string.
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 90%; margin-left: 15px; color:#009688!important;">
+                  <input matInput placeholder="Количество комнат."
+                         type="text" value="{{number_of_rooms.ad_from}}" formControlName="ad_from">
+                  <mat-hint style="color:#009688!important;" align="end">
+                    {{(!!number_of_rooms.value)?number_of_rooms.value.toString():'not specified.'}}
+                  </mat-hint>
+                  <mat-error *ngIf="number_of_rooms.hasError('required')">
+                    Field is empty.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="number_of_rooms.hasError('max')&& !number_of_rooms.hasError('required')">
+                    Too long string.
+                  </mat-error>
+                  <mat-error
+                          *ngIf="number_of_rooms.hasError('min')&&!number_of_rooms.hasError('required')">
+                    Too small string.
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <mat-form-field style="color: #009688!important;">
+            <input matInput [matDatepicker]="picker1" placeholder="Дата обновления." [formControl]="date">
+            <mat-datepicker-toggle (click)="log()" matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+
+
+
+
+
+
+
+    </ng-template>
+    <ng-template #Absent>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,60 @@
+.example-form {
+  min-width: 150px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+.example-card {
+  max-width: 400px;
+  min-width: 300px;
+  max-height: 70%;
+  margin: auto;
+  background:
+          -webkit-radial-gradient(50% 50%, #FFDAB9 , transparent),
+          -webkit-radial-gradient(left, 50% 50%, #F0E68C, transparent),
+          -webkit-radial-gradient(right, 50% 50%, #E0FFFF, transparent),
+          -webkit-radial-gradient(bottom right, 50% 50%, #98FB98, transparent),
+          -webkit-radial-gradient(top right, 50% 50%, #FFB6C1, transparent),
+          -webkit-radial-gradient(top left, 50% 50%, #FFA07A, transparent),
+          -webkit-radial-gradient(bottom, 50% 50%, #E6E6FA, transparent),
+          -webkit-radial-gradient(bottom left, 50% 50%, #AFEEEE, transparent);
+  background-position: center;
+  background-size: cover;
+}
+
+.example-header-image {
+  background-image: url('https://www.shareicon.net/download/2016/05/29/772558_user_512x512.png');
+  background-size: cover;
+  position: relative;
+  top: 25px;
+}
+
+
+.example-content{
+  // background: azure url("https://png.pngtree.com/element_origin_min_pic/16/10/28/a7092ac9d8312ba25407c55e5fc09497.jpg") no-repeat;
+  // background-position: center;
+  //  background-size: 100%;
+}
+
+.center{
+  position: relative;
+  left: 40%;
+}
+
+.transparent-text {
+  font-family: 'Rubik One', sans-serif;
+  font-size: 1.5vm;
+  text-transform: uppercase;
+  background: #2E2F45;
+  display: table;
+  margin: 20px auto;
+  color: white;
+  border-radius: 5px;
+  mix-blend-mode: multiply;
+  padding: 5px 10px;
+}

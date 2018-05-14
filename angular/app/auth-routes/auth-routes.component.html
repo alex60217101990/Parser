@@ -1,0 +1,32 @@
+  <!--
+
+    <mat-tab-group class="demo-tab-group">
+      <mat-tab label="Login">
+        <div class="demo-tab-content">
+          <app-auth-page></app-auth-page>
+        </div>
+      </mat-tab>
+      <mat-tab label="Check in">
+        <div class="demo-tab-content">
+          <app-auth-page-register></app-auth-page-register>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    -->
+
+  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="firstFormGroup">
+          <div class="demo-tab-content">
+              <ng-template matStepLabel>Login</ng-template>
+              <app-auth-page></app-auth-page>
+          </div>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+          <div class="demo-tab-content">
+              <ng-template matStepLabel>Register</ng-template>
+              <app-auth-page-register></app-auth-page-register>
+          </div>
+      </mat-step>
+  </mat-horizontal-stepper>

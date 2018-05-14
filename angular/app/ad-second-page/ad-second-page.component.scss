@@ -1,0 +1,50 @@
+@media screen and (min-width: 500px) {
+  .button-row{
+    width: 30%;
+    justify-content: left;
+    align-items: left;
+  }
+}
+
+
+:host ::ng-deep .mat-input-placeholder{
+  color: #009688;
+  font-size: 14px!important;
+}
+:host ::ng-deep .mat-input{
+  color: #009688;
+}
+
+
+.example-full-width {
+  width: 100%;
+}
+.button-row{
+  display: flex;
+  align-items: center;
+  width: 55%;
+  padding: 8px 0px 5px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0!important;
+  color: #009688!important;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between!important;
+  align-items: center!important;
+  color: #009688!important;
+}
+
+:host ::ng-deep .mat-focused .mat-form-field-label {
+  color: #009688 !important;
+}
+
+:host ::ng-deep .mat-form-field-ripple {
+  background-color: #009688 !important;
+}

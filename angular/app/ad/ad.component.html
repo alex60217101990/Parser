@@ -1,0 +1,282 @@
+ <!-- <img src="storage/img_1.png">  -->
+ <mat-card style="width: 100%; margin: 0px; background: #8C9EFF">
+   <mat-card-content>
+       <h3 style="text-align: center; color: #3F51B5; margin-top: 20px;" class="example-h3">Images page:</h3>
+       <div *ngIf="galleryImages.length>0; then one else two;"></div>
+       <ng-template #one>
+           <div class="photoGal">
+           <ngx-gallery class="mat-elevation-z5" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+           </div>
+       </ng-template>
+       <ng-template #two>
+           <h2 class="example-h2" style="color: #3F51B5">Images not found.</h2>
+       </ng-template>
+
+
+       <mat-accordion style="margin: 20px!important; top: 20px!important;">
+           <mat-expansion-panel *ngFor="let photo of ImagesList; let counter=index;"
+                                [style.background]="active[counter]==true?'#C5CAE9':'#8C9EFF'"
+                                (opened)="toogleStyleActive(counter)"
+                                (closed)="toogleStylePassive(counter)" style="position: relative;">
+               <mat-expansion-panel-header>
+                   <mat-panel-title style="color: #455A64; font-size: 17px">
+                       {{counter+1}} <mat-icon style="color: #455A64;">image</mat-icon>
+                   </mat-panel-title>
+                   <mat-panel-description>
+                       <h5 style="text-align: center; color: #455A64;" class="example-h5"> {{photo.img_name}}</h5>
+                   </mat-panel-description>
+               </mat-expansion-panel-header>
+               <div class="wrapper">
+                  <div class="Link"> <img [src]="photo.img_path"/></div>
+                       <!-- style="width: 300px; height: auto; display: flex; justify-content: center;
+                         /*margin-right: calc(50% - 150px);*/ margin: auto;"-->
+                   <div class="Link">{{photo.img_path}}</div>
+               </div>
+               <mat-action-row>
+                   <button mat-button color="warn" style="display: flex; justify-content: center;" (click)="deleteImage(photo.id)">Delete</button>
+               </mat-action-row>
+           </mat-expansion-panel>
+       </mat-accordion>
+
+
+
+       <mat-accordion style="margin-top: 20px!important; top: 20px!important;">
+           <mat-expansion-panel [style.background]="cards2[0]==true?'#E0F2F1':'#8C9EFF'"
+                                (opened)="cards2[0]=!cards2[0]"
+                                (closed)="cards2[0]=!cards2[0]">
+               <mat-expansion-panel-header>
+                   <mat-panel-title color="primary">
+                       <mat-icon color="primary">photo_size_select_large</mat-icon>
+                   </mat-panel-title>
+                   <mat-panel-description>
+                       <h4 style="text-align: center; color: #3F51B5;" class="example-h4">Upload user avatar:</h4>
+                   </mat-panel-description>
+               </mat-expansion-panel-header>
+
+               <mat-radio-group [(ngModel)]="variant1">
+                   <mat-radio-button [checked]="true" [value]="variants1[0]" color="warn">Выбрать на жестком диске:</mat-radio-button>
+                   <mat-radio-button [value]="variants1[1]" color="warn">Указать глобальную ссылку:</mat-radio-button>
+               </mat-radio-group>
+               <div *ngIf="variant1==1; then one_var1 else one_var2"></div>
+               <ng-template #one_var1>
+       <div class="button-row" style="width: 50%">
+           <input #file type="file" [hidden]="true" accept="image/*" (change)="addPhoto($event)">
+           <mat-form-field class="example-full-width">
+                <input matInput placeholder="Select file:" style="color: #3F51B5; font-size: 17px!important;" disabled [value]="filename">
+           </mat-form-field>
+           <button mat-mini-fab style="background: linear-gradient(to left, #C51162, #FF4081); margin: 0px 4px 0px" #upload (click)="file.click()" matTooltip="Select photo." matTooltipPosition="below">
+               <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">attachment</mat-icon>
+           </button>
+           <button mat-mini-fab [style.background]="!select==true?'linear-gradient(to left, #C51162, #FF4081)':''" style="margin: 0px 4px 0px"
+                   [disabled]="select" (click)="uploadFile()" matTooltip="Upload photo on server." matTooltipPosition="below">
+               <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">file_upload</mat-icon>
+           </button>
+           <button mat-mini-fab [style.background]="!select==true?'linear-gradient(to left, #E65100, #EF6C00)':''" style="margin: 0px 4px 0px"
+                   [disabled]="select" (click)="refreshFile()" matTooltip="Refresh file input." matTooltipPosition="below">
+               <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">refresh</mat-icon>
+           </button>
+       </div>
+ <div class="button-row" style="width: 100%">
+     <form [formGroup]="Size1" style="width: 100%;">
+         <table class="example-full-width" cellspacing="0">
+             <tr>
+                 <td>
+                     <mat-form-field color="primary" style="width: 90%; margin-left: 15px;">
+                         <input matInput maxlength="3" minlength="2" placeholder="Avatar width."
+                                type="number" value="320" formControlName="width">
+                         <mat-hint style="color:#3F51B5;" color="primary" align="end">{{(!!WidthAva.value)?WidthAva.value.toString():0}}</mat-hint>
+                         <mat-error *ngIf="WidthAva.hasError('required')">
+                             Field is empty.
+                         </mat-error>
+                         <mat-error
+                                 *ngIf="WidthAva.hasError('pattern') && !WidthAva.hasError('required')">
+                             Please, enter valid value.
+                         </mat-error>
+                         <mat-error *ngIf="WidthAva.hasError('max')&& !WidthAva.hasError('required')">
+                             Too much value.
+                         </mat-error>
+                         <mat-error *ngIf="WidthAva.hasError('min')&&!WidthAva.hasError('required')">
+                             Too small value.
+                         </mat-error>
+                     </mat-form-field>
+                 </td>
+                 <td>
+                     <mat-form-field color="primary" style="width: 90%; margin-left: 15px;">
+                         <input matInput maxlength="3" minlength="2" placeholder="Avatar height."
+                                type="number" value="240" formControlName="height">
+                         <mat-hint style="color:#3F51B5;" color="primary" align="end">{{(!!HeightAva.value)?HeightAva.value.toString():0}}</mat-hint>
+                         <mat-error *ngIf="HeightAva.hasError('required')">
+                             Field is empty.
+                         </mat-error>
+                         <mat-error
+                                 *ngIf="HeightAva.hasError('pattern') && !HeightAva.hasError('required')">
+                             Please, enter valid value.
+                         </mat-error>
+                         <mat-error
+                                 *ngIf="HeightAva.hasError('max')&& !HeightAva.hasError('required')">
+                             Too much value.
+                         </mat-error>
+                         <mat-error
+                                 *ngIf="HeightAva.hasError('min')&&!HeightAva.hasError('required')">
+                             Too small value.
+                         </mat-error>
+                     </mat-form-field>
+                 </td>
+             </tr>
+         </table>
+     </form>
+ </div>
+ </ng-template>
+ <ng-template #one_var2>
+ <div class="button-row" style="width: 58%">
+     <mat-form-field color="primary" class="example-full-width">
+         <span matPrefix style="color:#3F51B5;" color="primary"><b>https:// &nbsp;</b></span>
+         <input matInput [formControl]="UrlFormControl" placeholder="Enter URL of image." [value]="value1">
+         <mat-error *ngIf="UrlFormControl.hasError('pattern') && !UrlFormControl.hasError('required')">
+             Please enter a valid URL.
+         </mat-error>
+         <mat-error *ngIf="UrlFormControl.hasError('required')">
+             Empty URL field.
+         </mat-error>
+         <mat-hint color="primary" style="color:#3F51B5;" align="end">{{(!!UrlFormControl.value)?UrlFormControl.value.toString():'not specified.'}}</mat-hint>
+         <mat-icon matSuffix color="primary">link</mat-icon><!--clearFunc1() -->
+     </mat-form-field>
+     <button mat-mini-fab style="background: linear-gradient(to left, #C51162, #FF4081);
+      margin: 0px 4px 0px" matTooltip="Save avatar."
+             (click)="saveAvatarUrl()" matTooltipPosition="below">
+         <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">cloud_upload</mat-icon>
+     </button>
+     <button mat-mini-fab [style.background]="!!UrlFormControl.value==true?'linear-gradient(to left, #E65100, #EF6C00)':''" style="margin: 0px 4px 0px"
+             [disabled]="!!!UrlFormControl.value" (click)="UrlFormControl.setValue('')" matTooltip="Refresh URL input." matTooltipPosition="below">
+         <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">refresh</mat-icon>
+     </button>
+ </div>
+ </ng-template>
+</mat-expansion-panel>
+
+
+
+           <mat-expansion-panel [style.background]="cards2[1]==true?'#E0F2F1':'#8C9EFF'"
+                                (opened)="cards2[1]=!cards2[1]"
+                                (closed)="cards2[1]=!cards2[1]">
+               <mat-expansion-panel-header>
+                   <mat-panel-title color="primary">
+                       <mat-icon color="primary">photo_library</mat-icon>
+                   </mat-panel-title>
+                   <mat-panel-description>
+                       <h4 style="text-align: center; color: #3F51B5;" class="example-h4">Upload a photo for your ad:</h4>
+                   </mat-panel-description>
+               </mat-expansion-panel-header>
+               <mat-radio-group [(ngModel)]="variant2">
+                   <mat-radio-button [checked]="true" [value]="variants2[0]" color="warn">Выбрать на жестком диске:</mat-radio-button>
+                   <mat-radio-button [value]="variants2[1]" color="warn">Указать глобальную ссылку:</mat-radio-button>
+               </mat-radio-group>
+               <div *ngIf="variant2==1; then two_var1 else two_var2"></div>
+               <ng-template #two_var1>
+                   <div class="button-row" style="width: 50%">
+                       <input #file1 multiple name="Images[]" type="file" [hidden]="true" accept="image/*" (change)="addImages($event)">
+                       <mat-form-field class="example-full-width">
+                           <input matInput placeholder="Select file:" style="color: #3F51B5; font-size: 17px!important;" disabled [value]="filename1">
+                       </mat-form-field>
+                       <button mat-mini-fab style="background: linear-gradient(to left, #C51162, #FF4081); margin: 0px 4px 0px" #upload1 (click)="file1.click()"
+                               matTooltip="Select photo." matTooltipPosition="below">
+                           <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">attachment</mat-icon>
+                       </button>
+                       <button mat-mini-fab [style.background]="!select1==true?'linear-gradient(to left, #C51162, #FF4081)':''" style="margin: 0px 4px 0px"
+                               [disabled]="select1" (click)="uploadFiles()" matTooltip="Upload photo on server." matTooltipPosition="below">
+                           <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">file_upload</mat-icon>
+                       </button>
+                       <button mat-mini-fab [style.background]="!select1==true?'linear-gradient(to left, #E65100, #EF6C00)':''" style="margin: 0px 4px 0px"
+                               [disabled]="select1" (click)="refreshFile1()" matTooltip="Refresh file input." matTooltipPosition="below">
+                           <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">refresh</mat-icon>
+                       </button>
+                   </div>
+
+                   <div class="button-row" style="width: 100%">
+                       <form [formGroup]="Size2" style="width: 100%;">
+                           <table class="example-full-width" cellspacing="0">
+                               <tr>
+                                   <td>
+                                       <mat-form-field color="primary" style="width: 90%; margin-left: 15px;">
+                                           <input matInput maxlength="3" minlength="2" placeholder="Load images width."
+                                                  type="number" value="320" formControlName="width_one">
+                                           <mat-hint style="color:#3F51B5;" color="primary" align="end">{{(!!WidthImg.value)?WidthImg.value.toString():320}}</mat-hint>
+                                           <mat-error *ngIf="WidthImg.hasError('required')">
+                                               Field is empty.
+                                           </mat-error>
+                                           <mat-error
+                                                   *ngIf="WidthImg.hasError('pattern') && !WidthImg.hasError('required')">
+                                               Please, enter valid value.
+                                           </mat-error>
+                                           <mat-error *ngIf="WidthImg.hasError('max')&& !WidthImg.hasError('required')">
+                                               Too much value.
+                                           </mat-error>
+                                           <mat-error *ngIf="WidthImg.hasError('min')&&!WidthImg.hasError('required')">
+                                               Too small value.
+                                           </mat-error>
+                                       </mat-form-field>
+                                   </td>
+                                   <td>
+                                       <mat-form-field color="primary" style="width: 90%; margin-left: 15px;">
+                                           <input matInput maxlength="3" minlength="2" placeholder="Avatar height."
+                                                  type="number" value="240" formControlName="height_one">
+                                           <mat-hint style="color:#3F51B5;" color="primary" align="end">{{(!!HeightImg.value)?HeightImg.value.toString():240}}</mat-hint>
+                                           <mat-error *ngIf="HeightImg.hasError('required')">
+                                               Field is empty.
+                                           </mat-error>
+                                           <mat-error
+                                                   *ngIf="HeightImg.hasError('pattern') && !HeightImg.hasError('required')">
+                                               Please, enter valid value.
+                                           </mat-error>
+                                           <mat-error
+                                                   *ngIf="HeightImg.hasError('max')&& !HeightImg.hasError('required')">
+                                               Too much value.
+                                           </mat-error>
+                                           <mat-error
+                                                   *ngIf="HeightImg.hasError('min')&&!HeightImg.hasError('required')">
+                                               Too small value.
+                                           </mat-error>
+                                       </mat-form-field>
+                                   </td>
+                               </tr>
+                           </table>
+                       </form>
+                   </div>
+               </ng-template>
+
+               <ng-template #two_var2>
+                   <div class="button-row" style="width: 58%">
+                       <mat-form-field color="primary" class="example-full-width">
+                           <span matPrefix style="color:#3F51B5;" color="primary"><b>https:// &nbsp;</b></span>
+                           <input matInput [formControl]="UrlAdFormControl" placeholder="Enter URL of image." value="https://www.google.com">
+                           <mat-error *ngIf="UrlAdFormControl.hasError('pattern') && !UrlAdFormControl.hasError('required')">
+                               Please enter a valid URL.
+                           </mat-error>
+                           <mat-error *ngIf="UrlAdFormControl.hasError('required')">
+                               Empty URL field.
+                           </mat-error>
+                           <mat-hint color="primary" style="color:#3F51B5;" align="end">{{(!!UrlAdFormControl.value)?UrlAdFormControl.value.toString():'not specified.'}}</mat-hint>
+                           <mat-icon matSuffix color="primary">link</mat-icon>
+                       </mat-form-field>
+                       <button mat-mini-fab style="background: linear-gradient(to left, #C51162, #FF4081);
+                                margin: 0px 4px 0px" matTooltip="Save avatar."
+                               (click)="saveAdImageUrl()" matTooltipPosition="below">
+                           <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">cloud_upload</mat-icon>
+                       </button>
+                       <button mat-mini-fab [style.background]="!!UrlAdFormControl.value==true?'linear-gradient(to left, #E65100, #EF6C00)':''" style="margin: 0px 4px 0px"
+                               [disabled]="!!!UrlAdFormControl.value" (click)="UrlAdFormControl.setValue('')" matTooltip="Refresh URL input." matTooltipPosition="below">
+                           <mat-icon aria-label="Example icon-button with a heart icon" style="color: #FCE4EC;">refresh</mat-icon>
+                       </button>
+                   </div>
+               </ng-template>
+
+
+
+
+
+
+           </mat-expansion-panel>
+       </mat-accordion>
+
+</mat-card-content>
+</mat-card>

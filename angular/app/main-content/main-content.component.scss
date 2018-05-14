@@ -1,0 +1,105 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+  font-size: 17px!important;
+  color: #3F51B5!important;
+}
+.mat-column-id, .mat-column-link, .mat-column-updated_at, .mat-column-ad_from,
+.mat-column-type_of_structure, .mat-column-type_of_apartment, .mat-column-number_of_rooms,
+.mat-column-floor, .mat-column-storey_house,.mat-column-total_area,
+
+.mat-column-living_space, .mat-column-kitchen_area, .mat-column-price,
+.mat-column-telephones, .mat-column-number_of_photos, .mat-column-status, .mat-column-number_of_similar,
+
+.mat-column-address, .mat-column-cause_of_change, .mat-column-exchange,
+.mat-column-formula_of_exchange, .mat-column-state, .mat-column-source_of_information,
+.mat-column-bathroom_type, .mat-column-wall_material, .mat-column-phone_line,
+.mat-column-having_a_bath, .mat-column-number_of_balconies, .mat-column-notes, .mat-column-display_info
+{
+  display:flex;
+  justify-content:center;
+  padding-left: 10px; padding-right: 10px;
+  text-align: center;
+  min-width: 200px;
+}
+.mat-table {
+  max-height: 3000px;
+  min-width: 2500px;
+  width: 10000px;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0px 5px;
+  margin: auto;
+  font-size: 1.2vm!important;
+  justify-content: space-between;
+}
+
+.mat-input-container {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+.example-full-width {
+  width: 80%;
+}
+
+.example-form {
+  min-width: 300px;
+  max-width: 1980px;
+  width: 100%;
+}
+
+.highlight{
+  background: #42A948; /* green */
+}
+.hovered:hover{
+  background: #D3D3D3;
+  transition: 0.5s;
+}
+.fontBody1{
+  overflow-x: scroll!important;
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+.fontBody{
+  height: 100px;
+  overflow-y: auto!important;
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  overflow-y: hidden;
+}
+@media screen and (max-width: 850px) {
+  .fontBody{
+    height: 90px!important;
+    overflow-y: scroll!important;
+    //text-overflow: ellipsis; /* Добавляем многоточие */
+  }
+}
+mat-cell{
+ // font-size: 1.1vm!important;
+  font-size: 1vm !important;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 2000px;
+  min-width: 300px;
+}
+
